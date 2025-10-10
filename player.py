@@ -1,5 +1,6 @@
 import math
 import random
+from main import available_moves
 
 class Player:
     def __init__(self,letter):
@@ -20,4 +21,3 @@ class Computer(Player):
 class Human(Player):
     def __init__(self,letter):
         super().__init__(letter)
-        
