@@ -2,6 +2,7 @@ from player import Human, Computer
 class Tic_Toe:
     def __init__(self):
         self.board = [ " " for _ in range (9)]
+        self.current_winner= None
         print(self.board)
 
     def print_board(self):
@@ -17,10 +18,11 @@ class Tic_Toe:
             print('|'+'|'.join(row)+'|')
 
     def available_moves(self):
+        moves= []
         #checks for the available moves 
         for(i,spot) in enumerate(self.board):
-            moves= []
-            if spot == '':
+            
+            if spot == ' ':
                 moves.append(i)
         return moves
     def empty_squares(self):
@@ -30,10 +32,10 @@ class Tic_Toe:
         return len(self.available_moves())
     
     def make_move(self,square, letter):
-        if self.board(square)== ' ':
-            self.board(square)= letter
+        if self.board[square]== ' ':
+            self.board[square]= letter
             if self.winner(square,letter):
-                self.current_winnner = letter
+                self.current_winner = letter
             return True
         return False
     def winner(self,square,letter):
@@ -57,11 +59,11 @@ class Tic_Toe:
             diagonal2 = [self.board[i] for i in [2,4,6]]
             if all([spot ==letter for spot in diagonal2]):
                 return True
-            return False
+        return False
 
 def play(game, x_player, o_player, print_game= True):
     if print_game:
-        game.print_board_nums()
+        game.print_number()
     
     letter = 'x'
     while game.empty_squares():
@@ -82,15 +84,16 @@ def play(game, x_player, o_player, print_game= True):
                 return letter
             #alternating turns 
             letter = 'o' if letter == 'x' else 'x'
-        if print_game:
+    if print_game:
             print('It \'s a tie')
 
 if __name__ == '__main__':
-    x_player = humanplayer('x')
+    x_player = Human('x')
+    o_player = Computer('o')
+    t= Tic_Toe()
+    play(t,x_player,o_player,print_game=True)
 
 
 
 
-T= Tic_Toe()
 
-num= T.print_number()
